@@ -1,0 +1,58 @@
+<script type="text/javascript">
+   google.charts.load("current", {packages:["timeline"], 'language': 'pt'});
+   google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+
+     var container = document.getElementById('example5.1');
+     var chart = new google.visualization.Timeline(container);
+     var dataTable = new google.visualization.DataTable();
+     dataTable.addColumn({ type: 'string', id: 'Room' });
+     dataTable.addColumn({ type: 'string', id: 'Name' });
+     dataTable.addColumn({ type: 'date', id: 'Start' });
+     dataTable.addColumn({ type: 'date', id: 'End' });
+
+     dataTable.addRows([
+
+       {% for reservation in reservations %}
+       [
+         '{{reservation.room.room_name}}', '{{reservation.event_name}}',
+         new Date (0,0,0,{{reservation.start_time.hour}}, {{reservation.start_time.minute}}, 0),
+         new Date (0,0,0,{{reservation.end_time.hour}}, {{reservation.end_time.minute}}, 0)
+       ],
+       {% endfor %}
+
+     ]);
+
+     var options = {
+       timeline: { colorByRowLabel: false }
+     };
+
+     // The select handler. Call the chart's getSelection() method
+     function selectHandler() {
+       var selectedItem = chart.getSelection();
+       if (selectedItem) {
+         var value = selectedItem[0];
+         alert('The user selected ' + value.row + ' ' + value.column);
+       }
+     }
+
+     // Listen for the 'select' event, and call my function selectHandler() when
+     // the user selects something on the chart.
+    //  google.visualization.events.addListener(chart, 'select', selectHandler);
+
+     chart.draw(dataTable, options);
+   }
+
+ </script>
+
+ <div class="row">
+   <div class="col-lg-12">
+     <div class="panel panel-default">
+       <div class="panel-heading">Disposição atual</div>
+       <div class="panel-body">
+         <div id="example5.1" style="height: 200px;"></div>
+       </div>
+     </div>
+   </div>
+ </div><!--/.row-->
