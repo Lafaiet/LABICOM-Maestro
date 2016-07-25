@@ -85,9 +85,15 @@ function InvalidMsg(textbox) {
 }
 </script>
 
-{% if success == 'True' %}
+{% if status == 'success' %}
 <script>
 swal("Sucesso!", "Sua mensagem foi enviada! Em breve te responderemos", "success");
+</script>
+{% endif%}
+
+{% if status == 'error' %}
+<script>
+swal("OPS!", "Algo deu errado e sua mensagem não foi enviada", "error");
 </script>
 {% endif%}
 

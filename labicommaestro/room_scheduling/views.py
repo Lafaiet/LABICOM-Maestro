@@ -25,6 +25,6 @@ def profile_view(request):
 def contact_view(request):
 
     if request.method == 'POST':
-        return render(request, 'contact.html', {'success': 'True' })
+        return render(request, 'contact.html', {'status': 'error' })
 
     return render(request, 'contact.html')
