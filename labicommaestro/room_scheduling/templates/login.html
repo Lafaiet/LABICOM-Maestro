@@ -1,0 +1,70 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login Page</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+			<div class="login-panel panel panel-default">
+        <div class="panel-heading">Entre com seu usuário e senha</div>
+				<div class="panel-body">
+
+          <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+          		{% csrf_token %}
+
+              <fieldset>
+							<div class="form-group">
+								<input class="form-control" placeholder="Usuário" name="username" type="text" autofocus="">
+							</div>
+							<div class="form-group">
+								<input class="form-control" placeholder="Senha" name="password" type="password" value="">
+							</div>
+							<input class="btn btn-primary" type="submit" value="Login"/>
+              <input type="hidden" name="next" value="{{ next }}" />
+						</fieldset>
+
+          		                        <!-- <p class="bs-component">
+          		                            <table>
+          		                                <tr>
+          		                                    <td>{{ form.username.label_tag }}</td>
+          		                                    <td>{{ form.username }}</td>
+          		                                </tr>
+          		                                <tr>
+          		                                    <td>{{ form.password.label_tag }}</td>
+          		                                    <td>{{ form.password }}</td>
+          		                                </tr>
+          		                            </table>
+          		                        </p>
+          		                        <p class="bs-component">
+          		                            <center>
+          		                                <input class="btn btn-success btn-sm" type="submit" value="login" />
+          		                            </center>
+          		                        </p>
+          		                        <input type="hidden" name="next" value="{{ next }}" /> -->
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+    </div>
+ </div>
+
+
+    <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+  </body>
+</html>
