@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load static from staticfiles %}
 
+{% block sidebar %}
+  {% include "sidebar.html" with active='principal' %}
+{% endblock%}
+
+
 {% block content %}
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">

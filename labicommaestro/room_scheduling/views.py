@@ -21,3 +21,7 @@ def request_reservation_view(request):
 def profile_view(request):
 
     return redirect("main_page")
+
+def contact_view(request):
+
+    return render(request, 'contact.html')
