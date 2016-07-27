@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from models import Reservation
+from models import Reservation, Room
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -15,7 +15,9 @@ def main_page_view(request):
 @login_required()
 def request_reservation_view(request):
 
-    return render(request, 'reservation_page.html')
+    rooms = Room.objects.all()
+
+    return render(request, 'reservation_page.html', {'rooms' : rooms})
 
 
 def profile_view(request):
