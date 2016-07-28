@@ -17,6 +17,9 @@ def request_reservation_view(request):
 
     rooms = Room.objects.all()
 
+    if request.method == 'POST':
+        return render(request, 'reservation_page.html', {'rooms' : rooms, 'status': 'error'})
+
     return render(request, 'reservation_page.html', {'rooms' : rooms})
 
 
