@@ -33,3 +33,6 @@ def contact_view(request):
         return render(request, 'contact.html', {'status': 'error' })
 
     return render(request, 'contact.html')
+
+def calendar_view(request):
+    return render(request, 'calendar.html', {})

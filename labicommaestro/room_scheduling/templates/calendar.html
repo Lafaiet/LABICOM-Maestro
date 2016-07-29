@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block head%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-year-calendar.min.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}"> -->
+
+
+<script src="{% static 'js/respond.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'js/bootstrap-year-calendar.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-year-calendar.pt.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-popover.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+
+{% endblock%}
+
+{% block sidebar %}
+  {% include "sidebar.html" with active='calendario' %}
+{% endblock%}
+
+
+{% block content %}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Calendário</h1>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="calendar"></div>
+        </div>
+      </div>
+    </div>
+  </div><!--/.row-->
+
+</div>
+
+
+<script type="text/javascript" class="publish" charset="UTF-8">
+
+$(function() {
+    var currentYear = new Date().getFullYear();
+
+    var currentTime = new Date();
+
+    var redDateTime = new Date(currentYear, 2, 13).getTime();
+    var circleDateTime = new Date(currentYear, 1, 20).getTime();
+    var borderDateTime = new Date(currentYear, 0, 12).getTime();
+
+    $('.calendar').calendar({
+        // enableContextMenu: true,
+        // enableRangeSelection: true,
+        language: 'pt',
+        clickDay: function(e) {
+          // url = "https://www.google.com/calendar";
+          // $( location ).attr("href", url);},
+          alert("clicked at " + e.date.toLocaleDateString("pt-BR"));
+        },
+
+        customDayRenderer: function(element, date) {
+            if(date.getTime() == redDateTime) {
+                $(element).css('font-weight', 'bold');
+                $(element).css('font-size', '15px');
+                $(element).css('color', 'green');
+            }
+            else if(date.getTime() == circleDateTime) {
+                $(element).css('background-color', 'red');
+                $(element).css('color', 'white');
+                $(element).css('border-radius', '15px');
+            }
+            else if(date.getTime() == borderDateTime) {
+                $(element).css('border', '2px solid blue');
+            }
+            else if(date.getDate() == currentTime.getDate() && date.getMonth() == currentTime.getMonth()){
+              $(element).css('font-weight', 'bold');
+              $(element).css('font-size', '15px');
+              $(element).css('color', 'blue');
+            }
+        },
+        mouseOnDay: function(e) {
+            if(e.events.length > 0) {
+                var content = '';
+
+                for(var i in e.events) {
+                    content += '<div class="event-tooltip-content">'
+                                    + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
+                                    + '<div class="event-location">' + e.events[i].location + '</div>'
+                                    + '<div class="total-num">' + "Total events : " + e.events[i].totalNum + '</div>'
+                                + '</div>';
+                }
+
+                $(e.element).popover({
+                    trigger: 'manual',
+                    container: 'body',
+                    html:true,
+                    content: content
+                });
+
+                $(e.element).popover('show');
+            }
+        },
+        mouseOutDay: function(e) {
+            if(e.events.length > 0) {
+                $(e.element).popover('hide');
+            }
+        },
+        dayContextMenu: function(e) {
+            $(e.element).popover('hide');
+        },
+        dataSource: [
+            {
+                id: 0,
+                name: 'Google I/O',
+                location: 'San Francisco, CA',
+                startDate: new Date(currentYear, 4, 28),
+                endDate: new Date(currentYear, 4, 29),
+                totalNum: 10,
+            }
+        ]
+    });
+
+});
+
+  </script>
+
+  {% endblock%}
