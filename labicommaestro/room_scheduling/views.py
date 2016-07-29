@@ -36,3 +36,6 @@ def contact_view(request):
 
 def calendar_view(request):
     return render(request, 'calendar.html', {})
+
+def test(request):
+    return render(request, 'login2.html')

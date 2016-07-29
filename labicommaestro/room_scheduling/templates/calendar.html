@@ -55,9 +55,9 @@ $(function() {
         // enableRangeSelection: true,
         language: 'pt',
         clickDay: function(e) {
-          // url = "https://www.google.com/calendar";
-          // $( location ).attr("href", url);},
-          alert("clicked at " + e.date.toLocaleDateString("pt-BR"));
+          url = "/";
+          $( location ).attr("href", url);
+          //alert("clicked at " + e.date.toLocaleDateString("pt-BR"));
         },
 
         customDayRenderer: function(element, date) {
