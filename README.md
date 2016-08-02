@@ -8,6 +8,16 @@
 
 Sistema para agendamento e organização do uso de salas e laboratórios do  LABICOM UFG (**Laboratórios Integrados de Comunicação e Informação**)
 
+## Requisitos
+
+A aplicação roda em qualquer ambiente que surporte python.
+
+Em distribuições debian/ubuntu, instale o **pip**:
+
+```bash
+$ sudo apt-get update && install python-pip
+```
+
 ## Execução
 
 Faça um clone desse repositório e execute:
@@ -17,6 +27,12 @@ $ sudo pip install -r requirements.txt
 ```
 
 Dentro da pasta ```labicommaestro``` execute:
+
+```bash
+python manage.py collectstatic
+```
+
+Em seguida:
 
 ```bash
 python manage.py runserver
