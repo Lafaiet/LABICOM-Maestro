@@ -38,7 +38,7 @@
                   {% csrf_token %}
 
             <div class="form-group">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Nome*" oninvalid="this.setCustomValidity('Preencha esse campo!')" required oninput="setCustomValidity('')" />
+              <input type="text" class="form-control" id="name" name="name" autofocus placeholder="Nome*" oninvalid="this.setCustomValidity('Preencha esse campo!')" required oninput="setCustomValidity('')" />
               <span class="help-block" style="display: none;">Entre com seu nome</span>
             </div>
             <div class="form-group">

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from models import Reservation, Room
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+import datetime
+from itertools import chain
 
 # Create your views here.
 
@@ -23,6 +26,23 @@ def request_reservation_view(request):
     return render(request, 'reservation_page.html', {'rooms' : rooms})
 
 
+def reservation_day_view(request, year, month, day):
+    #year, month, day = reservation_date.split('/')
+    date = datetime.date(int(year), int(month), int(day))
+    reservations1 = Reservation.objects.filter(event_date=date)
+
+    reservations2 =  Reservation.objects.filter(is_permanent=True).filter(weekday=date.weekday())
+
+    reservations = list(chain(reservations1, reservations2))
+
+    for reservation in reservations:
+        if reservation.is_permanent:
+            reservation.event_name += "*"
+
+    return render(request, 'reservas.html', {'reservations' : reservations, 'date' : date})
+
+
+
 def profile_view(request):
 
     return redirect("main_page")
@@ -37,5 +57,10 @@ def contact_view(request):
 def calendar_view(request):
     return render(request, 'calendar.html', {})
 
+def register_user_view(request):
+    if request.method == 'POST':
+        return render(request, 'register.html', {'status': 'error' })
+    return render(request, 'register.html')
+
 def test(request):
-    return render(request, 'login2.html')
+    return render(request, 'register.html')

@@ -16,7 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from room_scheduling.views import main_page_view, request_reservation_view, profile_view, contact_view, calendar_view, test
+from room_scheduling.views import (test, main_page_view, request_reservation_view,
+                                   profile_view, contact_view, calendar_view,
+                                   reservation_day_view, register_user_view)
 from room_scheduling.forms import LoginForm
 
 urlpatterns = [
@@ -24,11 +26,13 @@ urlpatterns = [
     url(r'^reservar$', request_reservation_view, name='reservation_page'),
     url(r'^contato$', contact_view, name='contact'),
     url(r'^calendario$', calendar_view, name='calendar'),
+    url(r'^reservas/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d+)/$', reservation_day_view, name='reservas'),
     url(r'^test$', test),
 
     url(r'^admin/', admin.site.urls),
 
     url(r'^accounts/profile/$', profile_view),
+    url(r'^registrar/$', register_user_view),
     url(r'^accounts/login/$', auth_views.login, {'template_name': 'login.html', 'authentication_form': LoginForm}),
     url(r'^accounts/logout/$', auth_views.logout, {'next_page': '/accounts/login/'}),
 ]

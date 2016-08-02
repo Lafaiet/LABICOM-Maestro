@@ -20,3 +20,12 @@ class Reservation(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     room = models.ForeignKey(Room)
+    event_date = models.DateField(null=True, blank = True)
+
+    is_permanent = models.BooleanField(default = False)
+
+    weekdays_choices = ((0, 'monday'), (1, 'tuesday'),
+                        (2, 'wednesday'), (3, 'thursday'),
+                        (4, 'friday'), (5, 'saturday'),
+                        (6, 'sunday'))
+    weekday = models.IntegerField(null = True, blank  = True, choices = weekdays_choices)

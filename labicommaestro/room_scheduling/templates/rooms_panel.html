@@ -25,7 +25,8 @@
      ]);
 
      var options = {
-       timeline: { colorByRowLabel: false }
+       timeline: { colorByRowLabel: false },
+       height : 500,
      };
 
      // The select handler. Call the chart's getSelection() method
@@ -33,13 +34,13 @@
        var selectedItem = chart.getSelection();
        if (selectedItem) {
          var value = selectedItem[0];
-         alert('The user selected ' + value.row + ' ' + value.column);
+         alert('The user selected ' + value.row);
        }
      }
 
      // Listen for the 'select' event, and call my function selectHandler() when
      // the user selects something on the chart.
-    //  google.visualization.events.addListener(chart, 'select', selectHandler);
+     google.visualization.events.addListener(chart, 'select', selectHandler);
 
      chart.draw(dataTable, options);
    }
@@ -49,9 +50,10 @@
  <div class="row">
    <div class="col-lg-12">
      <div class="panel panel-default">
-       <div class="panel-heading">Reservas para o dia "{{date}}"</div>
+       <div class="panel-heading">Reservas para o dia <strong>{{date}}</strong></div>
        <div class="panel-body">
-         <div id="example5.1" style="height: 500px;"></div>
+         <div id="example5.1"></div>
+         <div class="alert alert-info" role="alert">*Reserva fixa</div>
        </div>
      </div>
    </div>
