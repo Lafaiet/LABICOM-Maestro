@@ -23,5 +23,5 @@ var/
 
 *.sql
 *.log
-static_root/*
+static_root/
 settings_dev.py
