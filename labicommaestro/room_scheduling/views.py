@@ -11,9 +11,9 @@ from itertools import chain
 
 def main_page_view(request):
 
-    reservations = Reservation.objects.all()
-
-    return render(request, 'main_page.html', {'reservations' : reservations})
+    today_date = datetime.date.today()
+    str_date = today_date.isoformat().replace('-', '/')
+    return redirect('/reservas/%s'%(str_date))
 
 @login_required()
 def request_reservation_view(request):

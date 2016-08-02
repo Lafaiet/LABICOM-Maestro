@@ -3,14 +3,17 @@
   <ul class="nav menu">
     <li class=".. {% if active == 'principal' %} active {% endif %}"><a href="/"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Reservas de hoje</a></li>
     <li class=".. {% if active == 'calendario' %} active {% endif %}"><a href="/calendario"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Calendário</a></li>
-    <li class=".. {% if active == 'reservar' %} active {% endif %}"><a href="reservar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Solicitar Reserva</a></li>
+    <li class=".. {% if active == 'reservar' %} active {% endif %}"><a href="/reservar"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Solicitar Reserva</a></li>
     <li class=".. {% if active == 'salas' %} active {% endif %}"><a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Salas Disponíveis</a></li>
 
     <li role="presentation" class="divider"></li>
-    <li class=".. {% if active == 'login' %} active {% endif %}"><a href="accounts/login/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Página de Login</a></li>
+    <li class=".. {% if active == 'login' %} active {% endif %}"><a href="/accounts/login/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Página de Login</a></li>
 
     <li role="presentation" class="divider"></li>
-    <li class=".. {% if active == 'contato' %} active {% endif %}"><a href="contato"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contato</a></li>
+    <li class=".. {% if active == 'contato' %} active {% endif %}"><a href="/contato"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contato</a></li>
+
+    <li role="presentation" class="divider"></li>
+    <li class=".. {% if active == 'sobre' %} active {% endif %}"><a href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Sobre</a></li>
 
   </ul>
 
