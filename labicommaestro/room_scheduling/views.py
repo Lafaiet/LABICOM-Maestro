@@ -29,9 +29,9 @@ def request_reservation_view(request):
 def reservation_day_view(request, year, month, day):
     #year, month, day = reservation_date.split('/')
     date = datetime.date(int(year), int(month), int(day))
-    reservations1 = Reservation.objects.filter(event_date=date)
+    reservations1 = Reservation.objects.filter(event_date=date).filter(confirmed=True)
 
-    reservations2 =  Reservation.objects.filter(is_permanent=True).filter(weekday=date.weekday())
+    reservations2 =  Reservation.objects.filter(is_permanent=True).filter(weekday=date.weekday()).filter(confirmed=True)
 
     reservations = list(chain(reservations1, reservations2))
 

@@ -29,3 +29,5 @@ class Reservation(models.Model):
                         (4, 'friday'), (5, 'saturday'),
                         (6, 'sunday'))
     weekday = models.IntegerField(null = True, blank  = True, choices = weekdays_choices)
+
+    confirmed = models.BooleanField(default=False)
