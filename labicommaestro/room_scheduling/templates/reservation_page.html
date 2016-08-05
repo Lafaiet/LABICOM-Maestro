@@ -38,6 +38,24 @@
 <script src="{% static 'js/transition.js' %}"></script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#weekly").click(function(){
+
+      if ($("#weekly").is(":checked")) {
+        $("#datepicker").hide(600);
+        $("#timepicker").show(600);
+        $("#weekdays").show(600);
+      }
+      else{
+        $("#datepicker").show(600);
+        $("#timepicker").hide(600);
+        $("#weekdays").hide(600);
+      }
+
+    });
+});
+</script>
 
 
 {% endblock %}
@@ -57,14 +75,23 @@
       <div class="panel panel-default">
       <div class="panel-body">
 
-
 							<form id="contact-form" method="post">
                 {% csrf_token %}
                 <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label for="event_name">Título do Evento:</label>
+                      <input type="text" class="form-control" id="event_name" name="event_name">
+                      <span class="help-block" style="display: none;">Título do Evento</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <label for="sel1">Sala:</label>
-                      <select class="form-control" id="room">
+                      <label for="room">Sala:</label>
+                      <select class="form-control" id="room" name='room'>
                         {% for room in rooms %}
                         <option>{{room.room_name}}</option>
                         {% endfor %}
@@ -74,11 +101,81 @@
                 </div>
 
                 <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='1' id="weekly">Evento semanal</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="display:none" id="weekdays">
+                  <div class="col-lg-9">
+                    <div class="form-group">
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='0' name="sunday">Domingo</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='1' name="monday">Segunda</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='2' name="tuesday">Terça</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='4' name="sunday">Quarta</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='5' name="thurday">Quinta</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='6' name="friday">Sexta</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value='7' name="saturday">Sábado</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" id="timepicker" style="display:none">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label for="start-datetime">Início:</label>
+                      <div class="input-group clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="start_time">
+                        <input type="text" class="form-control" value="08:00">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label for="start-datetime">Fim:</label>
+                      <div class="input-group clockpicker" data-placement="right" data-align="top" data-autoclose="true" id="end_time">
+                        <input type="text" class="form-control" value="08:00">
+                        <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <script type="text/javascript">
+                $('#end_time, #start_time').clockpicker()
+                .find('input').change(function(){
+
+                });
+                </script>
+
+                <div class="row" id="datepicker">
                   <div class='col-sm-4'>
                     <div class="form-group">
                       <label for="start-datetime">Início:</label>
-                      <div class='input-group date' id='start-datetime'>
-                        <input type='text' class="form-control" />
+                      <div class='input-group date'>
+                        <input type='text' class="form-control" name='start-datetime'  id='start-datetime'/>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -88,8 +185,8 @@
                   <div class='col-sm-4'>
                     <div class="form-group">
                       <label for="end-datetime">Fim:</label>
-                      <div class='input-group date' id='end-datetime'>
-                        <input type='text' class="form-control" />
+                      <div class='input-group date'>
+                        <input type='text' class="form-control"  name='end-datetime' id='end-datetime'/>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -107,7 +204,7 @@
                 <div class="col-sm-3">
                   <div class="form-group">
                     <label for="people-qtd">Quantidade de pessoas:</label>
-                    <input type="text" class="form-control" id="people-qtd">
+                    <input type="text" class="form-control" id="people-qtd" name="people-qtd">
                     <span class="help-block" style="display: none;">Entre com sua mensagem.</span>
                   </div>
                 </div>

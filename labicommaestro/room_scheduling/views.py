@@ -21,7 +21,11 @@ def request_reservation_view(request):
     rooms = Room.objects.all()
 
     if request.method == 'POST':
+        print request.POST
+
         return render(request, 'reservation_page.html', {'rooms' : rooms, 'status': 'error'})
+
+
 
     return render(request, 'reservation_page.html', {'rooms' : rooms})
 
@@ -61,6 +65,9 @@ def register_user_view(request):
     if request.method == 'POST':
         return render(request, 'register.html', {'status': 'error' })
     return render(request, 'register.html')
+
+def about_view(request):
+    return render(request, 'about.html')
 
 def test(request):
     return render(request, 'register.html')

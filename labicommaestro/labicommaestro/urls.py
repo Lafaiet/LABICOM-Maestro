@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from room_scheduling.views import (test, main_page_view, request_reservation_view,
                                    profile_view, contact_view, calendar_view,
-                                   reservation_day_view, register_user_view)
+                                   reservation_day_view, register_user_view, about_view)
 from room_scheduling.forms import LoginForm
 
 urlpatterns = [
@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^contato$', contact_view, name='contact'),
     url(r'^calendario$', calendar_view, name='calendar'),
     url(r'^reservas/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d+)/$', reservation_day_view, name='reservas'),
-    url(r'^test$', test),
+    url(r'^sobre$', about_view),
 
     url(r'^admin/', admin.site.urls),
 
